@@ -3,7 +3,7 @@ const aiMark = "X";
 const humanMark = "O";
 
 function getAllEmptyCellsIndexes(currBdSt) {
-    return currBdSt.filter(i => i !== "O" && i !== "X");
+    return currBdSt.filter(i => i !== humanMark && i !== aiMark);
 }
 
 function checkIfWinnerFound(currBdSt, currMark) {
@@ -69,4 +69,4 @@ function minimax(currBdSt, currMark) {
 
 const currentPlayer = aiMark
 const bestPlayInfo = minimax(currentBoardState, currentPlayer);
-console.log(`Best move for ${currentPlayer}: ${bestPlayInfo.score}/${bestPlayInfo.index}`)
+console.log(`Best move for '${currentPlayer}' mark is to add to the cell number ${bestPlayInfo.index} - score: ${bestPlayInfo.score}`)
