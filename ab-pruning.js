@@ -2,6 +2,9 @@ const { humanMark, aiMark } = require('./constants')
 const { checkIfWinnerFound, getAllEmptyCellsIndexes } = require('./utils')
 
 
+// Muito semelhante ao negamax, porém com uma condição de corte na execução adicionada para poupar
+// processamento computacional.
+
 function negamax(currBdSt, currMark, alpha, beta) {
     const availCellsIndexes = getAllEmptyCellsIndexes(currBdSt);
 
@@ -33,12 +36,16 @@ function negamax(currBdSt, currMark, alpha, beta) {
         currBdSt[availCellsIndexes[i]] = currentTestPlayInfo.index;
         allTestPlayInfos.push(currentTestPlayInfo);
 
+        // A condição de avaliação da jogada foi movida para dentro do loop para que seja possível interromper
+        // a interação quando houver uma condição que satisfaça o alpha-beta pruning.
         const score = currentTestPlayInfo.score
         if (score > bestScore) {
             bestScore = score;
             bestTestPlay = i;
         }
 
+        // Realiza a comparação entre o alpha e o beta para realizar a interrupção da interação caso não
+        // seja necessário prosseguir.
         alpha = Math.max(alpha, bestScore);
         if (alpha >= beta) {
             console.log(`Cutting ${alpha} >= ${beta}`)
@@ -56,4 +63,5 @@ const alpha = -Infinity;
 const beta = +Infinity;
 
 const bestPlayInfo = negamax(currentBoardState, currentPlayer, alpha, beta);
+console.log(`currentBoardState: [${currentBoardState}]`)
 console.log(`Best move for '${currentPlayer}' mark is to add to the cell number ${bestPlayInfo.index} - score: ${bestPlayInfo.score}`)
