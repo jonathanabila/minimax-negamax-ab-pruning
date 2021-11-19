@@ -1,21 +1,6 @@
-const currentBoardState = ["X", 1, "O", 3, 4, 5, "O", 7, "X"];
-const aiMark = "X";
-const humanMark = "O";
+const { humanMark, aiMark } = require('./constants')
+const { checkIfWinnerFound, getAllEmptyCellsIndexes } = require('./utils')
 
-function getAllEmptyCellsIndexes(currBdSt) {
-    return currBdSt.filter(i => i !== humanMark && i !== aiMark);
-}
-
-function checkIfWinnerFound(currBdSt, currMark) {
-    return (currBdSt[0] === currMark && currBdSt[1] === currMark && currBdSt[2] === currMark) ||
-        (currBdSt[3] === currMark && currBdSt[4] === currMark && currBdSt[5] === currMark) ||
-        (currBdSt[6] === currMark && currBdSt[7] === currMark && currBdSt[8] === currMark) ||
-        (currBdSt[0] === currMark && currBdSt[3] === currMark && currBdSt[6] === currMark) ||
-        (currBdSt[1] === currMark && currBdSt[4] === currMark && currBdSt[7] === currMark) ||
-        (currBdSt[2] === currMark && currBdSt[5] === currMark && currBdSt[8] === currMark) ||
-        (currBdSt[0] === currMark && currBdSt[4] === currMark && currBdSt[8] === currMark) ||
-        (currBdSt[2] === currMark && currBdSt[4] === currMark && currBdSt[6] === currMark);
-}
 
 function minimax(currBdSt, currMark) {
     const availCellsIndexes = getAllEmptyCellsIndexes(currBdSt);
@@ -67,6 +52,8 @@ function minimax(currBdSt, currMark) {
     return allTestPlayInfos[bestTestPlay];
 }
 
+
+const currentBoardState = ["X", 1, "O", 3, 4, 5, "O", 7, "X"];
 const currentPlayer = aiMark
 const bestPlayInfo = minimax(currentBoardState, currentPlayer);
 console.log(`Best move for '${currentPlayer}' mark is to add to the cell number ${bestPlayInfo.index} - score: ${bestPlayInfo.score}`)

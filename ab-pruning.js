@@ -1,21 +1,6 @@
-const currentBoardState = ["X", 1, "O", 3, 4, 5, "O", 7, "X"];
-const aiMark = "X";
-const humanMark = "O";
+const { humanMark, aiMark } = require('./constants')
+const { checkIfWinnerFound, getAllEmptyCellsIndexes } = require('./utils')
 
-function getAllEmptyCellsIndexes(currBdSt) {
-    return currBdSt.filter(i => i !== aiMark && i !== humanMark);
-}
-
-function checkIfWinnerFound(currBdSt, currMark) {
-    return (currBdSt[0] === currMark && currBdSt[1] === currMark && currBdSt[2] === currMark) ||
-        (currBdSt[3] === currMark && currBdSt[4] === currMark && currBdSt[5] === currMark) ||
-        (currBdSt[6] === currMark && currBdSt[7] === currMark && currBdSt[8] === currMark) ||
-        (currBdSt[0] === currMark && currBdSt[3] === currMark && currBdSt[6] === currMark) ||
-        (currBdSt[1] === currMark && currBdSt[4] === currMark && currBdSt[7] === currMark) ||
-        (currBdSt[2] === currMark && currBdSt[5] === currMark && currBdSt[8] === currMark) ||
-        (currBdSt[0] === currMark && currBdSt[4] === currMark && currBdSt[8] === currMark) ||
-        (currBdSt[2] === currMark && currBdSt[4] === currMark && currBdSt[6] === currMark);
-}
 
 function negamax(currBdSt, currMark, alpha, beta) {
     const availCellsIndexes = getAllEmptyCellsIndexes(currBdSt);
@@ -64,6 +49,8 @@ function negamax(currBdSt, currMark, alpha, beta) {
     return allTestPlayInfos[bestTestPlay];
 }
 
+
+const currentBoardState = ["X", 1, "O", 3, 4, 5, "O", 7, "X"];
 const currentPlayer = aiMark;
 const alpha = -Infinity;
 const beta = +Infinity;

@@ -1,0 +1,10 @@
+{
+  "name": "minimax-negamax-ab-pruning",
+  "version": "1.0.0",
+  "description": "TP3-2021.4",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jonathan Tolentino Abila",
+  "license": "MIT"
+}
